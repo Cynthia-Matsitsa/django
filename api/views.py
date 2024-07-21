@@ -8,6 +8,7 @@ from student.models import Student
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from teacher.models import Teacher
+from rest_framework import status
 # Create your views here.
 class StudentListViews(APIView):
     def get(self, request):
@@ -34,3 +35,41 @@ class Class_PeriodListViews(APIView):
         class_period = Class_Period.objects.all()
         serializer = Class_PeriodSerializer(class_period, many=True)
         return Response(serializer.data)
+
+class StudentListViews(APIView):
+    def get(self,request):
+        students=Student.objects.all()
+        serializer=StudentSerializer(students,many=...)
+        return Response(serializer)
+    
+    def post(self,request):
+        serializer=StudentSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializerdata,status=status.HTTP_201_CREATED)
+        else:
+            return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
+        
+class StudentDetailsView(APIView):
+    def get(self,request,id):
+        student = Student.objects.opt(id=id)
+        serializer=StudentSerializer(student)
+        return Response(serializer.data)
+    
+class StudentDetailsView(APIView):
+    def put(self,request,id):
+        student = Student.objects.opt(id=id)
+        serializer=StudentSerializer(student)
+        return Response(serializer.datastatus)
+        
+  
+    
+    
+                
+    
+    
+    
+    
+        
+    
+     
